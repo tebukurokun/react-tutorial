@@ -1,18 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
-const LANGUAGES = ["JavaScript", "C++", "Ruby", "Java", "PHP", "Go"];
+export const List = ({ langs }) => {
 
-export const List = ({ title }) => {
   List.propTypes = {
-    title: PropTypes.string,
-  };
+    langs:PropTypes.arrayOf(PropTypes.string)
+  }
+
+  console.log(langs);
 
   return (
     <div>
-      {LANGUAGES.map((lang, index) => {
-        return <div key={index}>{lang}</div>;
-      })}
+      {
+        langs && langs.map((lang, index) => {
+          return <div key={index}>{ lang }</div>
+        })
+      }
     </div>
-  );
-};
+  )
+}
