@@ -21,6 +21,7 @@
         "indent": [2, 2],
         "eol-last": "error",
         "space-in-parens": ["warn", "always"],
-        "brace-style": 1
+        "brace-style": 1,
+        "react/react-in-jsx-scope": "off"
     }
 }

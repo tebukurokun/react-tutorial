@@ -2,10 +2,9 @@ import styled from "styled-components";
 import React from "react"
 import { useEffect } from 'react'
 import PropTypes from "prop-types"
+import { TabBodyContainer } from './components/tab-body-container';
 
-const Container = styled.div`
-  padding: 12px 64px;
-`
+
 const ListItem = styled.div`
   padding: 8px 16px;
 
@@ -29,12 +28,14 @@ export const List = ( { langs } ) => {
   }
 
   return (
-    <Container>
-      {
-        langs && langs.map( ( lang, index ) => {
-          return <ListItem key={index}>{ lang }</ListItem>
-        } )
-      }
-    </Container>
+    <TabBodyContainer title="言語リスト">
+      <div>
+        {
+          langs && langs.map( ( lang, index ) => {
+            return <ListItem key={index}>{ lang }</ListItem>
+          } )
+        }
+      </div>
+    </TabBodyContainer>
   )
 }

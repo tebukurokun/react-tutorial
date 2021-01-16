@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import React from "react"
 import { useEffect, useState } from "react"
+import PropTypes from "prop-types"
 import { List } from "./List"
 import { Form } from "./Form"
-import {getLanguages} from "./const/language"
+import { withLoading } from './hoc/withLoading';
+import { getLanguages } from "./const/language";
 
 const Header = styled.header`
   display: flex;
@@ -24,22 +26,18 @@ const HeaderLi = styled.li`
   border-bottom: ${props => props.focused ? '2px solid #F44336' : 'none' };
 `
 
+function App( {data} ) {
+  App.propTypes = {
+    data:PropTypes.arrayOf( PropTypes.string )
+  }
 
-function App() {
   const [tab, setTab] = useState( "list" )
-  const [langs, setLangs] = useState( [] ) 
-
+  const [langs, setLangs] = useState( data ) 
 
   useEffect(
     () => {
       console.log( 'App.js useeffect' )
-      fetchLanguages()
     }, [] )
-
-  const fetchLanguages = async () => {
-    const languages = await getLanguages()
-    setLangs( languages )
-  }
 
   const addLang = ( lang ) => {
     setLangs( [...langs, lang] );
@@ -49,8 +47,6 @@ function App() {
   return (
     <div>
       <Header>
-        {" "}
-        {/* 追加 */}
         <HeaderUl>
           <HeaderLi focused={tab === 'list'} onClick={() => setTab( "list" )}>リスト</HeaderLi>
           <HeaderLi focused={tab === 'form'} onClick={() => setTab( "form" )}>フォーム</HeaderLi>
@@ -61,4 +57,4 @@ function App() {
   )
 }
 
-export default App
+export default withLoading( App, getLanguages )
