@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom'
 import styled from 'styled-components';
 
-const modalRoot = document.getElementById( 'modal-root' );
+// TODO: null safe
+const modalRoot: HTMLElement = document.getElementById('modal-root') || document.createElement("div");
 
 const Container = styled.div`
   position: absolute;
@@ -15,10 +16,10 @@ const Container = styled.div`
   background-color: rgba(0, 0, 0, .5);
 `
 
-export const Modal = ( props ) => {
+export const Modal = (props: Element) => {
   return ReactDOM.createPortal(
     <Container>
-      { props.children }
+      {props.children}
     </Container>,
     modalRoot
   )
