@@ -10,25 +10,29 @@ const LoadDiv = styled.div`
 `
 
 
-export const withLoading = ( WrappedComponent, fetchData ) => {
+export const withLoading = ( WrappedComponent: React.FunctionComponent<{data: Array<string>}>, fetchData:() => Promise<Array<string>> ) : () => JSX.Element => {
   const loading = () => {
-    const [data, setData] = useState( null );
+    const [data, setData] = useState<Array<string>>(  );
     const [theme] = useContext( ThemeContext )
 
     useEffect( () => {
       fetch();
     }, [] )
 
-    const fetch = async () => {
+    const fetch = async () => {      
       const fetchedData = await fetchData();
+      
       setData( fetchedData );
+
+      console.log( fetchedData );
+      
     }
 
-    const Loading = (
+    const LoadingDiv = (
       <LoadDiv theme={theme}>Now Loading...</LoadDiv>
     )
 
-    return data ? <WrappedComponent data={data} /> : Loading;
+    return data ? <WrappedComponent data={data} /> : LoadingDiv;
 
   }
   return loading

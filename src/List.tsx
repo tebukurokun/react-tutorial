@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react"
 import { useEffect } from 'react'
-import PropTypes from "prop-types"
 import { TabBodyContainer } from './components/tab-body-container';
 
 
@@ -13,19 +12,14 @@ const ListItem = styled.div`
   }
 `
 
-export const List = ( { langs } ) => {
+export const List = ( { langs }: {langs: Array<string>} ): JSX.Element => {
 
   useEffect( () => {
     console.log( 'list useeffect' )
-
     return () => {
       console.log( 'list unmount' );
     }
   } )
-
-  List.propTypes = {
-    langs:PropTypes.arrayOf( PropTypes.string )
-  }
 
   return (
     <TabBodyContainer title="言語リスト">

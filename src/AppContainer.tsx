@@ -6,7 +6,7 @@ import { getLanguages } from "./const/language";
 
 const AppComponent = withLoading( App, getLanguages )
 
-export const AppContainer = () => {
+export const AppContainer = (): JSX.Element => {
   const [theme, setTheme] = useState( THEMES.dark );
 
   const toggleTheme = () => {

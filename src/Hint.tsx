@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PropTypes from "prop-types"
 import { useState, useRef, useEffect } from 'react';
 
 const HintContainer = styled.div`
@@ -31,18 +30,16 @@ const PopupContainer = styled.div`
   border-radius: 8px;
 `
 
-export const Hint = ( {message} ) => {
-  Hint.propTypes = {
-    message: PropTypes.string
-  }
+export const Hint = ( {message} : {message: string} ): JSX.Element => {
 
   const [showPopup, setShowPopup] = useState( false );
 
-  const ref = useRef( null );
+  const ref = useRef<HTMLDivElement>( null );
 
   useEffect( () => {
     // 表示されている時はfocus
-    if ( ref.current ) ref.current.focus();
+    ref.current?.focus()
+
   } )
   return (
     <HintContainer>

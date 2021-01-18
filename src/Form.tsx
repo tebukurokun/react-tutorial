@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from 'react'
 import {useState} from 'react'
 import styled from "styled-components";
 import { Button } from './components/button'
@@ -28,16 +27,12 @@ const FormButton = styled( Button )`
 width: 120px;
 `
 
-export const Form = ( { onAddLang } ) => {
-
-  Form.propTypes = {
-    onAddLang: PropTypes.func,
-  }
+export const Form = ( { onAddLang }:{onAddLang: ( arg: string )=>void} ): JSX.Element => {
 
   const [text, setText] = useState( '' )
   const [showModal, setShowModal] = useState( false )
   
-  const submitForm = ( event ) => {
+  const submitForm = ( event : React.FormEvent<HTMLFormElement> ) => {
     event.preventDefault()
     console.log( text );
     setShowModal( true )
@@ -59,12 +54,12 @@ export const Form = ( { onAddLang } ) => {
         <ButtonContainer>
           <FormButton>追加</FormButton>
         </ButtonContainer>
-      </form>
-      {
-        showModal && 
+        {
+          showModal && 
         <FormModal confirm={() => onAddLang( text )}  
           cancel={() => setShowModal( false )} /> 
-      }      
+        }      
+      </form>
     </TabBodyContainer>
   )
 
